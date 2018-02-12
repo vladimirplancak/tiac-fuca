@@ -13,6 +13,8 @@ import { FlexLayoutModule } from '@angular/flex-layout'
 
 import { environment } from '../environments/environment';
 import { HomeComponent } from './components/home/home.component';
+import { PlayersInmemoryService } from './shared/services/players-inmemory.service';
+import { PlayersFirebaseService } from './shared/services/players-firebase.service';
 
 
 const routes: Routes = [
@@ -33,10 +35,12 @@ const routes: Routes = [
     MaterialModule,
     FormsModule,
     ReactiveFormsModule,
-    FlexLayoutModule,
+    FlexLayoutModule, 
     RouterModule.forRoot(routes)
   ],
-  providers: [],
+  providers: [
+    {provide: PlayersFirebaseService, useClass: PlayersInmemoryService}
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

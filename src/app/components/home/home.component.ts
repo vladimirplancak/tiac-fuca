@@ -3,6 +3,8 @@ import { MatSelectionList, MatSelectionListChange, MatListOption } from '@angula
 import * as _ from 'lodash'
 import { FootballTeam } from '../../models/football-team';
 import { SideColor } from '../../enums/side-color.enum';
+import { IPlayerService } from '../../shared/services/IPlayerService';
+import { PlayersFirebaseService } from '../../shared/services/players-firebase.service';
 
 @Component({
   selector: 'app-home',
@@ -10,27 +12,16 @@ import { SideColor } from '../../enums/side-color.enum';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
-  constructor() { }
+  constructor(
+    private _playerService: PlayersFirebaseService
+  ) { }
 
   @ViewChild('players') list: MatSelectionList;
   
-  public playerList = ['Bane', 'Ceca', 'Robert', 'Mita', 'Vlada', 'Limun', 'Vaske'];
+  public playerList : String[] = [];
 
   public readTeam : FootballTeam = null;
   public blueTeam : FootballTeam = null;
-
-  ngOnInit() {
-  }
-  
-  ngAfterViewInit() {
-    this.list.selectionChange.subscribe((listSelectionEvent : MatSelectionListChange)=>{
-      let selectedCount = listSelectionEvent.source.selectedOptions.selected.length;
-
-      if(selectedCount > 4){
-        listSelectionEvent.option.selected = false;
-      }
-    })
-  }
 
   public randomize(){
     this.readTeam = null;
@@ -49,5 +40,21 @@ export class HomeComponent implements OnInit {
       this.readTeam = new FootballTeam(teams[0], SideColor.red);
       this.blueTeam = new FootballTeam(teams[1], SideColor.blue);
     }
+  }
+
+  ngOnInit() {
+    this._playerService.getAll().subscribe((players)=>{
+      this.playerList = players;
+    });
+  }
+  
+  ngAfterViewInit() {
+    this.list.selectionChange.subscribe((listSelectionEvent : MatSelectionListChange)=>{
+      let selectedCount = listSelectionEvent.source.selectedOptions.selected.length;
+
+      if(selectedCount > 4){
+        listSelectionEvent.option.selected = false;
+      }
+    })
   }
 }
