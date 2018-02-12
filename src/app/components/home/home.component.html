@@ -1,0 +1,18 @@
+<mat-selection-list #players style="margin-top: 20px" dense>
+    <h3 matSubheader>Footballers: </h3>
+    <mat-list-option *ngFor="let player of playerList" [value]="player">
+      {{player}}
+    </mat-list-option>
+</mat-selection-list>
+<div fxLayout="column" fxLayoutAlign="center center">
+  <button mat-raised-button color="warn" [disabled]="players.selectedOptions.selected.length < 4"(click)="randomize()">Randomize</button>
+</div>
+
+<div fxLayout="row" fxLayoutAlign="space-evenly center" style="margin-top: 20px;">
+  <mat-card *ngIf="readTeam" style="background: #f44336">
+    <mat-card-title *ngFor="let item of readTeam.players">{{ item }}</mat-card-title>
+  </mat-card>
+  <mat-card *ngIf="blueTeam" style="background: #673ab7">
+    <mat-card-title *ngFor="let item of blueTeam.players">{{ item }}</mat-card-title>
+  </mat-card>
+</div>
