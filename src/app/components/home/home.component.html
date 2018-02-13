@@ -1,7 +1,7 @@
 <div fxLayout="column" fxLayoutAlign="center center">
   <mat-selection-list #players style="margin-top: 20px" dense class="full-width">
     <h3 matSubheader>Footballers: </h3>
-    <mat-list-option *ngFor="let player of playerList" [value]="player">
+    <mat-list-option *ngFor="let player of playersList | async" [value]="player">
       {{ player.name }}
     </mat-list-option>
   </mat-selection-list>
@@ -13,7 +13,7 @@
     <mat-card *ngIf="readTeam" style="background: #f44336">
       <mat-card-title *ngFor="let item of readTeam.players">{{ item.name }}</mat-card-title>
     </mat-card>
-    <mat-card *ngIf="blueTeam" style="background: #673ab7">
+    <mat-card *ngIf="blueTeam" style="background: blue">
       <mat-card-title *ngFor="let item of blueTeam.players">{{ item.name }}</mat-card-title>
     </mat-card>
   </div>

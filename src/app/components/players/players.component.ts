@@ -32,25 +32,19 @@ export class PlayersComponent implements OnInit {
 
       var newPlayer = Player.new(playerName, playerImgUrl);
 
-      this._playerService.addPlayer(newPlayer).subscribe((it)=>{
-        this.getPlayers();
+      this._playerService.addPlayer(newPlayer).subscribe(()=>{
         this.form.reset();
       });
     }
   }
 
   public removePlayer(player : Player){
-    this._playerService.removePlayer(player);
-    this.players = this._playerService.getAll();
-  }
-
-  public getPlayers(){
-    this.players = this._playerService.getAll();
+    this._playerService.deletePlayer(player);
   }
 
 
   ngOnInit() {
-    this.getPlayers();
+    this.players = this._playerService.players;
   }
 
 }

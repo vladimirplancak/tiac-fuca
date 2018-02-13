@@ -4,8 +4,9 @@ import { MatSelectionList, MatSelectionListChange, MatListOption } from '@angula
 import * as _ from 'lodash'
 import { FootballTeam } from '../../models/football-team';
 import { SideColor } from '../../enums/side-color.enum';
-import { IPlayerService } from '../../shared/services/IPlayerService';
+import { PlayerService } from '../../shared/services/PlayerService';
 import { PlayersFirebaseService } from '../../shared/services/players-firebase.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-home',
@@ -19,7 +20,7 @@ export class HomeComponent implements OnInit {
 
   @ViewChild('players') list: MatSelectionList;
   
-  public playerList : Player[] = [];
+  public playersList : Observable<Player[]>
 
   public readTeam : FootballTeam = null;
   public blueTeam : FootballTeam = null;
@@ -44,9 +45,7 @@ export class HomeComponent implements OnInit {
   }
 
   ngOnInit() {
-    this._playerService.getAll().subscribe((players)=>{
-      this.playerList = players;
-    });
+    this.playersList = this._playerService.players;
   }
   
   ngAfterViewInit() {

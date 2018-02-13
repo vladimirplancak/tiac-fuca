@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { IPlayerService } from './IPlayerService';
-import { Observable } from 'rxjs';
+import { PlayerService } from './PlayerService';
+import { Observable, BehaviorSubject } from 'rxjs';
 import * as _ from 'lodash'
 import { Player } from '../../models/player';
 
@@ -15,27 +15,33 @@ let players: Player[] = [
 ]
 
 @Injectable()
-export class PlayersInmemoryService implements IPlayerService {
-
+export class PlayersInmemoryService implements PlayerService {
+  private _players: BehaviorSubject<Player[]> = null;
 
   constructor() {
-   }
-
-   public addPlayer(player: Player): Observable<Player>{
-    var maxId = _.max(_.map(players, it=> it.id));
-    player.id = maxId + 1;
-    players.push(player);
-
-    return Observable.of(player);
-   }
-
-  public getAll(): Observable<Player[]> {
-    //To avoide reference.
-    return Observable.of(_.clone(players));;
+    this._players = new BehaviorSubject<Player[]>(players);
+    this._players.next(players);
   }
 
-  public removePlayer(player: Player): void {
+  get players(): Observable<Player[]> {
+    return this._players.asObservable();
+  }
+
+  public addPlayer(player: Player): Observable<Player> {
+    player.id = players.length + 1;
+    players.push(player);
+
+    this._players.next(players);
+
+    return Observable.of(player);
+  }
+
+  public deletePlayer(player: Player): Observable<void> {
     _.remove(players, it => it.id === player.id);
+
+    this._players.next(players);
+
+    return Observable.of();
   }
 
 }
