@@ -15,9 +15,11 @@ import { environment } from '../environments/environment';
 import { HomeComponent } from './components/home/home.component';
 import { PlayersInmemoryService } from './shared/services/players-inmemory.service';
 import { PlayersFirebaseService } from './shared/services/players-firebase.service';
+import { PlayersComponent } from './components/players/players.component';
 
 
 const routes: Routes = [
+  { path: "players", component: PlayersComponent },
   { path: "home", component: HomeComponent },
   { path: "**", redirectTo: "home" },
   
@@ -26,7 +28,8 @@ const routes: Routes = [
 @NgModule({
   declarations: [
     AppComponent,
-    HomeComponent
+    HomeComponent,
+    PlayersComponent
   ],
   imports: [
     BrowserModule,

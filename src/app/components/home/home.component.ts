@@ -1,3 +1,4 @@
+import { Player } from './../../models/player';
 import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
 import { MatSelectionList, MatSelectionListChange, MatListOption } from '@angular/material';
 import * as _ from 'lodash'
@@ -18,7 +19,7 @@ export class HomeComponent implements OnInit {
 
   @ViewChild('players') list: MatSelectionList;
   
-  public playerList : String[] = [];
+  public playerList : Player[] = [];
 
   public readTeam : FootballTeam = null;
   public blueTeam : FootballTeam = null;

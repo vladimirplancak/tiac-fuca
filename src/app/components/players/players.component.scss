@@ -1,0 +1,12 @@
+.example-header-image{
+    background-image: url('http://www.tiacgroup.com/wp-content/uploads/2015/06/limun.jpg');
+    background-size: cover;
+}
+
+.full-width{
+    width: 50%;
+
+    @media screen and (max-width: 800px) {
+        width: 100%;
+    }
+}

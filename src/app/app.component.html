@@ -6,7 +6,8 @@
 
     <button mat-button [matMenuTriggerFor]="menu"><mat-icon>menu</mat-icon></button>
     <mat-menu #menu="matMenu">
-        <button mat-menu-item routeLink="['/home']">Randomizer</button>
+        <button mat-menu-item [routerLink]="['/home']">Randomizer</button>
+        <button mat-menu-item [routerLink]="['/players']">Players</button>
     </mat-menu>
 </mat-toolbar>
 <router-outlet></router-outlet>

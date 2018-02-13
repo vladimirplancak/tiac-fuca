@@ -1,0 +1,25 @@
+<div fxLayout="column" fxLayoutAlign="center center" style="margin-top: 20px">
+  <mat-list role="list"  class="full-width">
+    <mat-list-item role="listitem" *ngFor="let player of players | async">
+      <span matLine color="primary">
+        <span [style.background-image]="'url(' + player.imgUrl + ')'"></span>
+        <span>{{ player.name }}</span>
+      </span>
+      <button mat-icon-button (click)="removePlayer(player)">
+        <mat-icon>delete</mat-icon>
+      </button>
+    </mat-list-item>
+  </mat-list>
+  <form fxLayout="row" fxLayout.xs="column" fxLayoutAlign="space-evenly center"  class="full-width" [formGroup]="form">
+    <mat-form-field>
+      <input matInput placeholder="Player name" formControlName="name">
+      <mat-error *ngIf="form.get('name').hasError('required')">
+          Name is <strong>required</strong>
+      </mat-error>
+    </mat-form-field>
+    <!-- <mat-form-field>
+      <input matInput placeholder="Image url" formControlName="imgUrl">
+    </mat-form-field> -->
+    <button mat-raised-button color="warn" (click)="addPlayer()" [disabled]='form.invalid'>Add</button>
+  </form>
+</div>
