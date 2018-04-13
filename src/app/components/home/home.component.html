@@ -5,13 +5,14 @@
       {{ player.name }}
     </mat-list-option>
   </mat-selection-list>
-  <div fxLayout="column" fxLayoutAlign="center center" class="full-width">
+  <div fxLayout="row" fxLayoutAlign="center center" class="full-width">
     <button mat-raised-button color="warn" [disabled]="players.selectedOptions.selected.length < 4" (click)="randomize()">Randomize</button>
+    <a mat-raised-button color="warn" [routerLink]="['/timer']" *ngIf="redTeam && blueTeam" [style.margin-left.px]="10">Timer</a>
   </div>
 
-  <div fxLayout="row" fxLayoutAlign="space-evenly center" style="margin-top: 20px;" class="full-width">
-    <mat-card *ngIf="readTeam" style="background: #f44336">
-      <mat-card-title *ngFor="let item of readTeam.players">{{ item.name }}</mat-card-title>
+  <div fxLayout="row" fxLayoutAlign="space-evenly center" [style.margin-top.px]="20" class="full-width">
+    <mat-card *ngIf="redTeam" style="background: #f44336">
+      <mat-card-title *ngFor="let item of redTeam.players">{{ item.name }}</mat-card-title>
     </mat-card>
     <mat-card *ngIf="blueTeam" style="background: blue">
       <mat-card-title *ngFor="let item of blueTeam.players">{{ item.name }}</mat-card-title>

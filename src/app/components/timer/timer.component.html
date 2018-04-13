@@ -1,0 +1,14 @@
+<div fxLayout="column" fxLayoutAlign="center center" style="margin-top: 20px">
+  <mat-card class="mat-elevation-z0">
+    <mat-card-title>Timer: {{ currentTime }}</mat-card-title>
+    <mat-form-field>
+      <input matInput type="number" placeholder="time" [(ngModel)]="timeToSet" (change)="inputChanged()">
+      <span matSuffix>Minutes</span>
+    </mat-form-field>
+    <mat-card-actions>
+      <button mat-raised-button color="warn" (click)="tStart()">Start</button>
+      <button mat-raised-button color="warn" (click)="tRestart()">Restart</button>
+      <button mat-raised-button color="warn" (click)="tStop()">Stop</button>
+    </mat-card-actions>
+  </mat-card>
+</div>

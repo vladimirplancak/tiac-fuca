@@ -16,11 +16,13 @@ import { HomeComponent } from './components/home/home.component';
 import { PlayersInmemoryService } from './shared/services/players-inmemory.service';
 import { PlayersFirebaseService } from './shared/services/players-firebase.service';
 import { PlayersComponent } from './components/players/players.component';
+import { TimerComponent } from './components/timer/timer.component';
 
 
 const routes: Routes = [
   { path: "players", component: PlayersComponent },
   { path: "home", component: HomeComponent },
+  { path: "timer", component: TimerComponent },
   { path: "**", redirectTo: "home" },
   
 ]
@@ -29,7 +31,8 @@ const routes: Routes = [
   declarations: [
     AppComponent,
     HomeComponent,
-    PlayersComponent
+    PlayersComponent,
+    TimerComponent
   ],
   imports: [
     BrowserModule,
